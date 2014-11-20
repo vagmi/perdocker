@@ -16,7 +16,7 @@ const (
 // Runner run several workers
 type Runner interface {
 	RunWorker()
-	Eval(*Lang, string) Result
+	Eval(*Lang, string, string) Result
 }
 
 type runner struct {
@@ -92,9 +92,9 @@ func (r *runner) sendCommandToWorker(c Command) {
 
 }
 
-func (r *runner) Eval(lang *Lang, code string) Result {
+func (r *runner) Eval(lang *Lang, code string, stdin string) Result {
 	respCh := make(chan Result)
-	r.newEval <- NewCommand(lang, code, respCh)
+	r.newEval <- NewCommand(lang, code, stdin, respCh)
 	return <-respCh
 }
 

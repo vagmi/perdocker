@@ -86,7 +86,7 @@ func (s *server) langHandler(w http.ResponseWriter, r *http.Request, lang *Lang)
 		return
 	}
 
-	res, err := s.eval(lang, string(body))
+	res, err := s.eval(lang, string(body), "")
 
 	if err != nil {
 		log.Println(err)
@@ -128,8 +128,9 @@ func (s *server) phpHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 type RequestJson struct {
-	Lang string `json:"language"`
-	Code string `json:"code"`
+	Lang  string `json:"language"`
+	Code  string `json:"code"`
+	StdIn string `json:"stdin"`
 }
 
 func (s *server) evaluateHandler(w http.ResponseWriter, r *http.Request) {
@@ -159,7 +160,7 @@ func (s *server) evaluateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err = s.eval(lang, js.Code)
+	res, err = s.eval(lang, js.Code, js.StdIn)
 
 	if err != nil {
 		log.Println(err)
@@ -169,10 +170,10 @@ func (s *server) evaluateHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(res.Bytes())
 }
 
-func (s *server) eval(lang *Lang, code string) (Result, error) {
+func (s *server) eval(lang *Lang, code string, stdin string) (Result, error) {
 	runner, ok := s.runners[lang.Name]
 	if !ok {
 		return nil, ErrCantFindRunner
 	}
-	return runner.Eval(lang, code), nil
+	return runner.Eval(lang, code, stdin), nil
 }

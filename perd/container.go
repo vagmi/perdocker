@@ -141,10 +141,17 @@ func (c *container) Exec(command Command) (*Exec, error) {
 	}
 
 	execStr := lang.RunCommand(fileGuest)
-
+	stdinStr := command.Stdin()
 	err = c.sendCommand(execStr + " 3>&- ")
 	if err != nil {
 		return nil, err
+	}
+	if stdinStr != "" {
+		err = c.sendInput(stdinStr)
+		if err != nil {
+			return nil, err
+		}
+		time.Sleep(100 * time.Millisecond)
 	}
 
 	err = c.echoEnd()
@@ -200,6 +207,10 @@ func (c *container) sendCommand(command string) error {
 	case <-time.After(5 * time.Second):
 		return ErrSendCommandTimeout
 	}
+	return nil
+}
+func (c *container) sendInput(input string) error {
+	c.inCh <- []byte(input)
 	return nil
 }
 
