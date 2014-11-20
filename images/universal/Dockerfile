@@ -2,8 +2,8 @@
 #
 # VERSION               0.0.1
 
-FROM      ubuntu
-MAINTAINER Nox73
+FROM      ubuntu:14.04
+MAINTAINER vagmi
 
 # make sure the package repository is up to date
 RUN apt-get update
@@ -11,6 +11,7 @@ RUN apt-get install -y wget ca-certificates build-essential
 
 # RUBY
 RUN apt-get install -y curl
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 # C & C++
@@ -35,7 +36,10 @@ RUN ln -s /usr/local/node/bin/node /usr/bin/node
 RUN apt-get install -y php5
 
 #PYTHON 
-# built-in to ububntu
+RUN apt-get install -y python
+
+#JAVA
+RUN apt-get install -y openjdk-7-jdk
 
 # USER
 RUN groupadd perdocker

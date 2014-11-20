@@ -29,28 +29,28 @@ func (l *Lang) ExecutableFile() string {
 }
 
 // Ruby language settings
-var Ruby = &Lang{"ruby", "run.rb", ".rb", "perdocker/ruby:attach", "ruby %s"}
+var Ruby = &Lang{"ruby", "run.rb", ".rb", "vagmi/perdruby:attach", "ruby %s"}
 
 // Nodejs settings
-var Nodejs = &Lang{"nodejs", "index.js", ".js", "perdocker/nodejs:attach", "node %s"}
+var Nodejs = &Lang{"nodejs", "index.js", ".js", "vagmi/perdnodejs:attach", "node %s"}
 
 // Golang settings
-var Golang = &Lang{"golang", "main.go", ".go", "perdocker/go:attach", "go run %s"}
+var Golang = &Lang{"golang", "main.go", ".go", "vagmi/perdgo:attach", "go run %s"}
 
 // Python settings
-var Python = &Lang{"python", "run.py", ".py", "perdocker/python:attach", "python %s"}
+var Python = &Lang{"python", "run.py", ".py", "vagmi/perdpython:attach", "python %s"}
 
 // C settings
-var C = &Lang{"c", "a.c", ".c", "perdocker/c:attach", "gcc -o /tmp/a %s && /tmp/a"}
+var C = &Lang{"c", "a.c", ".c", "vagmi/perdc:attach", "gcc -o /tmp/a %s && /tmp/a"}
 
 // CPP settings
-var CPP = &Lang{"cpp", "a.cpp", ".cpp", "perdocker/c:attach", "g++ -o /tmp/a %s && /tmp/a"}
+var CPP = &Lang{"cpp", "a.cpp", ".cpp", "vagmi/perdc:attach", "g++ -o /tmp/a %s && /tmp/a"}
 
 // PHP settings
-var PHP = &Lang{"php", "index.php", ".php", "perdocker/php:attach", "php %s"}
+var PHP = &Lang{"php", "index.php", ".php", "vagmi/perdphp:attach", "php %s"}
 
-// Universal languages container 
-var Universal = &Lang{"universal", "file", "", "perdocker/universal:latest", "cat %s"}
+// Universal languages container
+var Universal = &Lang{"universal", "file", "", "vagmi/perduniversal:latest", "cat %s"}
 
 var Languages = map[string]*Lang{
 	"ruby":       Ruby,

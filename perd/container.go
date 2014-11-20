@@ -26,7 +26,7 @@ type Container interface {
 
 const (
 	// MemLimit sets allowed memory limit
-	MemLimit = "20m"
+	MemLimit = "30m"
 
 	// CPULimit sets allowed CPU count
 	CPULimit = "1"
@@ -194,6 +194,7 @@ func (c *container) clearStd() error {
 }
 
 func (c *container) sendCommand(command string) error {
+	log.Println("Executing :", command)
 	select {
 	case c.inCh <- []byte(command):
 	case <-time.After(5 * time.Second):

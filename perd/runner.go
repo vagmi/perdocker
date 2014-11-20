@@ -6,11 +6,11 @@ import (
 )
 
 const (
-	killTimeout      = 5 * time.Second
+	killTimeout      = 15 * time.Second
 	minWorkersCount  = 1
 	newWorkerTimeout = 50 * time.Millisecond
 	//Empirically chosen number in which there are no problems during normal operation
-	systemDefaultProcessCount = 26
+	systemDefaultProcessCount = 36
 )
 
 // Runner run several workers
