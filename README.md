@@ -16,6 +16,8 @@ Currently supported languages are:
 - javascript (nodejs 0.10.24)
 - golang (1.2)
 - python (2.7.3)
+- java 1.7
+- C# (4.x via mono)
 - C (gcc 4.6.3)
 - C++ (g++ 4.6.3)
 - PHP (5.3.10)
@@ -65,6 +67,22 @@ class Program {
 }
 "
 {"stdout":"hello world\n","stderr":"","meta":"","exitCode":0}
+
+curl  http://192.168.1.2:8080/api/evaluate/cs -d "
+using System; 
+
+namespace Main 
+{ 
+  class Welcome 
+  { 
+    public static void Main( string[] args ) 
+    { 
+    Console.Write("Hello world\n"); 
+    } 
+  } 
+}
+"
+{"stdout":"Hello World\n","stderr":"Compilation Succeeded","meta":"","exitCode":0}
 
 ```
 ## Install

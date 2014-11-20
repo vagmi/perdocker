@@ -12,6 +12,7 @@ var nodejsWorkers = flag.Int64("nodejs-workers", 1, "Count of nodejs workers.")
 var golangWorkers = flag.Int64("golang-workers", 1, "Count of golang workers.")
 var pythonWorkers = flag.Int64("python-workers", 1, "Count of python workers.")
 var cWorkers = flag.Int64("c-workers", 1, "Count of C workers.")
+var csWorkers = flag.Int64("cs-workers", 1, "Count of Mono workers.")
 var cppWorkers = flag.Int64("cpp-workers", 1, "Count of C++ workers.")
 var javaWorkers = flag.Int64("java-workers", 1, "Count of JAVA workers.")
 var phpWorkers = flag.Int64("php-workers", 1, "Count of PHP workers.")
@@ -47,6 +48,7 @@ func separatedServer() perd.Server {
 		"golang": *golangWorkers,
 		"python": *pythonWorkers,
 		"c":      *cWorkers,
+		"cs":     *csWorkers,
 		"cpp":    *cppWorkers,
 		"php":    *phpWorkers,
 		"java":   *javaWorkers,
