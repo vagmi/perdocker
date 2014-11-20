@@ -41,6 +41,9 @@ RUN apt-get install -y python
 #JAVA
 RUN apt-get install -y openjdk-7-jdk
 
+#C#
+RUN apt-get install -y mono-mcs
+
 # USER
 RUN groupadd perdocker
 RUN useradd -g perdocker perdocker

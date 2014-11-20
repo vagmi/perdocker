@@ -27,6 +27,7 @@ func NewServer(listen string, workers map[string]int64, timeout int64) Server {
 		"golang": NewRunner(Golang, workers["golang"], timeout),
 		"python": NewRunner(Python, workers["python"], timeout),
 		"c":      NewRunner(C, workers["c"], timeout),
+		"cs":     NewRunner(C, workers["cs"], timeout),
 		"java":   NewRunner(C, workers["java"], timeout),
 		"cpp":    NewRunner(CPP, workers["cpp"], timeout),
 		"php":    NewRunner(PHP, workers["php"], timeout),
@@ -43,6 +44,7 @@ func NewUniversalServer(listen string, workers, timeout int64) Server {
 		"golang": runner,
 		"python": runner,
 		"c":      runner,
+		"cs":     runner,
 		"cpp":    runner,
 		"php":    runner,
 		"java":   runner,
@@ -71,6 +73,7 @@ func (s *server) Run() {
 	http.HandleFunc("/api/evaluate/golang", s.golangHandler)
 	http.HandleFunc("/api/evaluate/python", s.pythonHandler)
 	http.HandleFunc("/api/evaluate/c", s.cHandler)
+	http.HandleFunc("/api/evaluate/cs", s.csHandler)
 	http.HandleFunc("/api/evaluate/cpp", s.cppHandler)
 	http.HandleFunc("/api/evaluate/php", s.phpHandler)
 	http.HandleFunc("/api/evaluate/java", s.javaHandler)
@@ -117,6 +120,10 @@ func (s *server) pythonHandler(w http.ResponseWriter, r *http.Request) {
 
 func (s *server) cHandler(w http.ResponseWriter, r *http.Request) {
 	s.langHandler(w, r, C)
+}
+
+func (s *server) csHandler(w http.ResponseWriter, r *http.Request) {
+	s.langHandler(w, r, CS)
 }
 
 func (s *server) cppHandler(w http.ResponseWriter, r *http.Request) {

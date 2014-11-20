@@ -46,6 +46,9 @@ var C = &Lang{"c", "a.c", ".c", "vagmi/perdc:attach", "gcc -o /tmp/a %s && /tmp/
 // JAVA settings
 var JAVA = &Lang{"java", "program.java", ".java", "vagmi/perdjava:attach", "javac -d /tmp %s && java -cp /tmp Program"}
 
+// CS settings. Redirect warnings on STDOUT to STDERR. duh
+var CS = &Lang{"cs", "program.cs", ".cs", "vagmi/perdmono:attach", "dmcs -out:/tmp/program.exe %s 1>&2 && mono /tmp/program.exe"}
+
 // CPP settings
 var CPP = &Lang{"cpp", "a.cpp", ".cpp", "vagmi/perdc:attach", "g++ -o /tmp/a %s && /tmp/a"}
 
@@ -62,6 +65,7 @@ var Languages = map[string]*Lang{
 	"golang":     Golang,
 	"python":     Python,
 	"c":          C,
+	"cs":         CS,
 	"cpp":        CPP,
 	"java":       JAVA,
 	"php":        PHP,
