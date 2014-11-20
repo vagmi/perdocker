@@ -43,6 +43,9 @@ var Python = &Lang{"python", "run.py", ".py", "vagmi/perdpython:attach", "python
 // C settings
 var C = &Lang{"c", "a.c", ".c", "vagmi/perdc:attach", "gcc -o /tmp/a %s && /tmp/a"}
 
+// JAVA settings
+var JAVA = &Lang{"java", "program.java", ".java", "vagmi/perdjava:attach", "javac -d /tmp %s && java -cp /tmp Program"}
+
 // CPP settings
 var CPP = &Lang{"cpp", "a.cpp", ".cpp", "vagmi/perdc:attach", "g++ -o /tmp/a %s && /tmp/a"}
 
@@ -60,5 +63,6 @@ var Languages = map[string]*Lang{
 	"python":     Python,
 	"c":          C,
 	"cpp":        CPP,
+	"java":       JAVA,
 	"php":        PHP,
 }

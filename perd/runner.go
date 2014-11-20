@@ -10,7 +10,7 @@ const (
 	minWorkersCount  = 1
 	newWorkerTimeout = 50 * time.Millisecond
 	//Empirically chosen number in which there are no problems during normal operation
-	systemDefaultProcessCount = 36
+	systemDefaultProcessCount = 50
 )
 
 // Runner run several workers

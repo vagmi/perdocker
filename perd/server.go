@@ -27,6 +27,7 @@ func NewServer(listen string, workers map[string]int64, timeout int64) Server {
 		"golang": NewRunner(Golang, workers["golang"], timeout),
 		"python": NewRunner(Python, workers["python"], timeout),
 		"c":      NewRunner(C, workers["c"], timeout),
+		"java":   NewRunner(C, workers["java"], timeout),
 		"cpp":    NewRunner(CPP, workers["cpp"], timeout),
 		"php":    NewRunner(PHP, workers["php"], timeout),
 	}
@@ -44,6 +45,7 @@ func NewUniversalServer(listen string, workers, timeout int64) Server {
 		"c":      runner,
 		"cpp":    runner,
 		"php":    runner,
+		"java":   runner,
 	}
 	return &server{&config{listen}, runners}
 }
@@ -71,6 +73,7 @@ func (s *server) Run() {
 	http.HandleFunc("/api/evaluate/c", s.cHandler)
 	http.HandleFunc("/api/evaluate/cpp", s.cppHandler)
 	http.HandleFunc("/api/evaluate/php", s.phpHandler)
+	http.HandleFunc("/api/evaluate/java", s.javaHandler)
 
 	log.Println("Listen http on", s.config.listen)
 	http.ListenAndServe(s.config.listen, nil)
@@ -101,6 +104,9 @@ func (s *server) rubyHandler(w http.ResponseWriter, r *http.Request) {
 	s.langHandler(w, r, Ruby)
 }
 
+func (s *server) javaHandler(w http.ResponseWriter, r *http.Request) {
+	s.langHandler(w, r, JAVA)
+}
 func (s *server) golangHandler(w http.ResponseWriter, r *http.Request) {
 	s.langHandler(w, r, Golang)
 }

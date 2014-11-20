@@ -18,6 +18,8 @@ build-image:
 
 build-images-lang: build-image-ruby build-image-nodejs build-image-go build-image-python build-image-c build-image-php
 
+build-image-java:
+	docker --dns 8.8.8.8 build -rm -t="vagmi/perdjava:attach" ./images/java/
 build-image-ruby:
 	docker --dns 8.8.8.8 build -rm -t="vagmi/perdruby:attach" ./images/ruby/
 build-image-nodejs:
