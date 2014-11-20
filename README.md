@@ -23,8 +23,8 @@ Currently supported languages are:
 ## API
 
 - `POST /api/evaluate/< language_name >` with file in body.
-- `POST /api/evaluate/` with JSON in body. JSON should content
-  `language` field & `code` field.
+- `POST /api/evaluate/` with JSON in body. JSON should contain
+  `language` field & `code` field. It can also optionally contain a `stdin` field.
 
 ### Curl examples
 
@@ -44,6 +44,9 @@ curl -POST -d "print(\"Hello, World\")" 'http://localhost:8080/api/evaluate/pyth
 curl -POST -d '{"language":"ruby", "code":"puts 1"}' 'http://localhost:8080/api/evaluate'
 {"stdout":"1\n","stderr":"","exitCode":0}
 
+curl -POST -d '{"language":"ruby","code":"a=gets; b=gets; puts a; puts :d; puts b","stdin": "hello1\nhello2"}' 'http://localhost:8080/api/evaluate'
+{"stdout":"hello1\nd\nhello2\n","stderr":"","meta":"","exitCode":0}
+
 curl  http://192.168.1.2:8080/api/evaluate/cpp -d "
 #include <iostream>
 
@@ -53,6 +56,16 @@ std::cout << \"Hello\"; return 0;
 }
 "
 {"stdout":"Hello\n","stderr":"","meta":"","exitCode":0}
+
+curl  http://192.168.1.2:8080/api/evaluate/java -d "
+class Program {
+  public static void main(String args[]) {
+    System.out.println("hello world");
+  }
+}
+"
+{"stdout":"hello world\n","stderr":"","meta":"","exitCode":0}
+
 ```
 ## Install
 
